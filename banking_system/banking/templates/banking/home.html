@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <div class="jumbotron">
+      <h1 class="display-4">Welcome to the Banking System</h1>
+      <p class="lead">View the list of customers:</p>
+      <a class="btn btn-primary btn-lg" href="{% url 'customer_list' %}" role="button">View Customers</a>
+    </div>
+  </div>
+{% endblock %}

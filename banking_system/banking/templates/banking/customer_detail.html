@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Customer Detail{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <h1 class="mt-5">Customer Detail</h1>
+    <div class="card mt-4">
+      <div class="card-body">
+        <h5 class="card-title">{{ customer.name }}</h5>
+        <p class="card-text">Email: {{ customer.email }}</p>
+        <p class="card-text">Current Balance: {{ customer.current_balance }}</p>
+      </div>
+    </div>
+  </div>
+{% endblock %}
