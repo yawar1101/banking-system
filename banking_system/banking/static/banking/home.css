@@ -1,0 +1,13 @@
+img {
+    background-image: url("{% static 'images/bank.avif' %}");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+#about-us {
+    padding: 3rem;
+}

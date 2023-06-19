@@ -1,13 +1,35 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block title %}Home{% endblock %}
+{% block title %}
+Home
+{% endblock %}
+{% block css_files %}
+<link rel="stylesheet" href="{% static 'banking/home.css' %}">
+{% endblock %}
 
+
+   
 {% block content %}
-  <div class="container">
-    <div class="jumbotron">
+  <img src="{% static 'images/bank.avif' %}" alt="Home">
+    {% comment %} <div class="jumbotron">
       <h1 class="display-4">Welcome to the Banking System</h1>
       <p class="lead">View the list of customers:</p>
       <a class="btn btn-primary btn-lg" href="{% url 'customer_list' %}" role="button">View Customers</a>
-    </div>
-  </div>
+    </div> {% endcomment %}
+    <section id="about-us">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <h2 class="section-title">About TSF Bank</h2>
+            <p class="section-description">Welcome to TSF Bank, your trusted financial partner. We are committed to providing top-notch banking services tailored to your needs. With a focus on innovation, convenience, and customer satisfaction, we strive to make your banking experience seamless and rewarding.</p>
+            <p class="section-description">At TSF Bank, we believe in building strong relationships with our customers. Our team of dedicated professionals is always ready to assist you in achieving your financial goals, whether it's saving for the future, managing investments, or securing loans.</p>
+          </div>
+          <div class="col-md-6">
+            <img src="{% static 'images/dev.jpeg' %}" alt="About Us Image" class="img-fluid">
+          </div>
+        </div>
+      </div>
+    </section>
+    
 {% endblock %}

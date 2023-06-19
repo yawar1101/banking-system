@@ -19,7 +19,7 @@
           <tr>
             <td>{{ customer.name }}</td>
             <td>{{ customer.email }}</td>
-            <td>{{ customer.current_balance }}</td>
+            <td>$ {{ customer.current_balance }}</td>
             <td>
               <a href="{% url 'customer_detail' customer.id %}" class="btn btn-primary btn-sm">View</a>
             </td>
