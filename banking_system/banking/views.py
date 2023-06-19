@@ -1,3 +1,4 @@
+from django.db import transaction
 from django.shortcuts import render, get_object_or_404, redirect
 from banking.models import Customer, Transaction
 from decimal import Decimal
@@ -13,6 +14,8 @@ def customer_detail(request, pk):
     customer = get_object_or_404(Customer, pk=pk)
     return render(request, 'banking/customer_detail.html', {'customer': customer})
 
+
+@transaction.atomic
 def transfer_money(request):
     customers = Customer.objects.all()
 
@@ -24,18 +27,21 @@ def transfer_money(request):
         sender = get_object_or_404(Customer, pk=sender_id)
         receiver = get_object_or_404(Customer, pk=receiver_id)
 
-        if amount <= Decimal('0') or sender.current_balance < amount:
-            return render(request, 'banking/transfer.html', {'customers': customers, 'error': 'Invalid amount or insufficient balance'})
 
-        sender.current_balance -= Decimal(amount)
-        receiver.current_balance += Decimal(amount)
+        with transaction.atomic():
 
-        sender.save()
-        receiver.save()
+            if amount <= Decimal('0') or sender.current_balance < amount:
+                return render(request, 'banking/transfer.html', {'customers': customers, 'error': 'Invalid amount or insufficient balance'})
 
-        # Create a transfer record
-        transfer = Transaction.objects.create(sender=sender, receiver=receiver, amount=amount)
-        transfer.save()
+            sender.current_balance -= Decimal(amount)
+            receiver.current_balance += Decimal(amount)
+
+            sender.save()
+            receiver.save()
+
+            # Create a transfer record
+            transfer = Transaction.objects.create(sender=sender, receiver=receiver, amount=amount)
+            transfer.save()
 
         return redirect('transfer_success')
     
